@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Simple App</string>
+    <string name="login_to_the_app">Login</string>
+    <string name="user_name">User Name</string>
+    <string name="email">Email</string>
+    <string name="submit">Submit</string>
+    <string name="email_error">Please provide valid email</string>
+    <string name="name_empty">Please enter name</string>
+    <string name="email_empty">Please enter email</string>
+    <string name="loading">Loading…</string>
+    <string name="successfully_loggedin">Successfully LoggedIn</string>
+    <string name="ok">OK</string>
+</resources>

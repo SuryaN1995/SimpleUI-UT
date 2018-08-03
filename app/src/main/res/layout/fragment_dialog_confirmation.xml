@@ -1,0 +1,55 @@
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="clickHandler"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        tools:context="com.android.consumerapp.ubi.LeadConfirmationDialogFragment">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:id="@+id/lead_title"
+            android:textColor="#de000000"
+            android:text="@string/successfully_loggedin"/>
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/lead_title"
+            android:id="@+id/lead_img"
+            android:layout_centerInParent="true"
+            android:src="@drawable/success"/>
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lead_img"
+            android:id="@+id/ok_button"
+            android:onClick="@{clickHandler::onClick}"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/ok"
+            android:textColor="#009688"/>
+
+    </RelativeLayout>
+</layout>
