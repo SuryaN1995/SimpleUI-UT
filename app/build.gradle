@@ -18,10 +18,23 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            testCoverageEnabled false
+            testCoverageEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    task copyTestClasses(type: Copy) {
+        from "build/tmp/kotlin-classes/debugUnitTest/com/example/techjini/loginapplicationsimple"
+        into "build/intermediates/classes/debug/com/example/techjini/loginapplicationsimple"
+    }
+
+    sourceSets {
+        test {
+            resources.srcDirs += ['src/main/assets']
+            // to mock response data inside JUnit UT
+        }
+    }
+
 
     testOptions {
         unitTests.returnDefaultValues = true

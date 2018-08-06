@@ -3,6 +3,7 @@ package com.example.techjini.loginapplicationsimple
 import android.app.ProgressDialog
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputLayout
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -14,6 +15,11 @@ import com.example.techjini.loginapplicationsimple.databinding.ActivityMainBindi
  */
 
 class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClickListener{
+
+    override fun showError(error: String?) {
+        binding?.root?.let { error?.let { it1 -> Snackbar.make(it, it1,Snackbar.LENGTH_SHORT).show() } }
+    }
+
     override fun setInvalidError(view: Int, isError : Boolean) {
         when(view){
             R.id.emailtil -> setErrorMessage(binding?.emailtil,isError,getString(R.string.email_error))
@@ -72,11 +78,13 @@ class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClickList
 
     private var binding : ActivityMainBinding ? = null
     private var presenter : MainPresenter ? = null
+    private var simpleAPI : SimpleAPI ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         binding?.clickHandler = this
-        presenter = MainPresenter(this,this)
+        simpleAPI = SimpleAPICall.getSimpleAPI(this)
+        presenter = MainPresenter(this, simpleAPI)
     }
 }

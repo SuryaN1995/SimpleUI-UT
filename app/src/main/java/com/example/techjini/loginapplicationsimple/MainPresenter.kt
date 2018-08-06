@@ -1,20 +1,18 @@
 package com.example.techjini.loginapplicationsimple
 
-import android.content.Context
-import android.text.Editable
-import android.widget.EditText
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
-import rx.internal.operators.OperatorReplay.observeOn
 import rx.schedulers.Schedulers
 import java.util.regex.Pattern
 
-const val REG_EXP_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
 
 /**
  * Created by Surya N on 03/08/18.
  */
-class MainPresenter(var view: MainContractor.View, var context: Context) : MainContractor.Presenter {
+open class MainPresenter(var view: MainContractor.View, var simpleAPI: SimpleAPI?) : MainContractor.Presenter {
+
+    // to check the email - id valid or not
+    private val REG_EXP_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
 
     override fun validateFields(username: String?, email: String?) {
         val model = InfoModel()
@@ -36,10 +34,7 @@ class MainPresenter(var view: MainContractor.View, var context: Context) : MainC
         view.setError(id, field == null || field.isEmpty())
     }
 
-    private var simpleAPI : SimpleAPI ? = null
-
     private fun makeAPI(model: InfoModel) {
-        simpleAPI = SimpleAPICall.getSimpleAPI(context)
         simpleAPI?.getInfo()
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribeOn(Schedulers.io())
@@ -58,7 +53,7 @@ class MainPresenter(var view: MainContractor.View, var context: Context) : MainC
     }
 
 
-    private inner class SubmitSubscriber : Subscriber<InfoModel>(){
+    open inner class SubmitSubscriber : Subscriber<InfoModel>(){
         override fun onNext(info : InfoModel?) {
             view?.hideProgress()
             if(info?.email?.isNotEmpty() == true){
@@ -71,6 +66,7 @@ class MainPresenter(var view: MainContractor.View, var context: Context) : MainC
 
         override fun onError(error : Throwable?) {
             view?.hideProgress()
+            view?.showError(error?.message)
         }
 
     }

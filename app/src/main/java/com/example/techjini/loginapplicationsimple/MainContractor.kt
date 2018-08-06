@@ -17,5 +17,6 @@ object MainContractor {
         fun updateUI()
         fun setError(view : Int,isError:Boolean)
         fun setInvalidError(view : Int,isError:Boolean)
+        fun showError(error : String?)
     }
 }
