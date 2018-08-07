@@ -3,6 +3,7 @@ package com.example.techjini.loginapplicationsimple
 import android.app.ProgressDialog
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.annotation.VisibleForTesting
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputLayout
 import android.support.v7.app.AppCompatActivity
@@ -18,6 +19,8 @@ open class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClic
 
     override fun showError(error: String?) {
         binding?.root?.let { error?.let { it1 -> Snackbar.make(it, it1,Snackbar.LENGTH_SHORT).show() } }
+        isDataReady = true
+        dataListener?.onDataLoaded()
     }
 
     override fun setInvalidError(view: Int, isError : Boolean) {
@@ -59,12 +62,16 @@ open class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClic
         progressDialog?.show()
     }
 
+    var dataListener : DataListener ? = null
+
     override fun hideProgress() {
         progressDialog?.dismiss()
     }
 
     override fun updateUI() {
         ConfirmDialogFragment().show(supportFragmentManager,ConfirmDialogFragment::class.java.name)
+        isDataReady = true
+        dataListener?.onDataLoaded()
     }
 
     private var progressDialog: ProgressDialog? = null
@@ -86,5 +93,18 @@ open class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClic
         binding?.clickHandler = this
         simpleAPI = SimpleAPICall.getSimpleAPI(this)
         presenter = MainPresenter(this, simpleAPI)
+    }
+
+    // To perform anything in test we annotate that function as VisibleForTesting
+    @VisibleForTesting
+    fun setSimpleAPI(simpleAPI: SimpleAPI){
+        this.simpleAPI = simpleAPI
+    }
+
+
+    var isDataReady : Boolean = false
+
+    interface DataListener{
+        fun onDataLoaded()
     }
 }
