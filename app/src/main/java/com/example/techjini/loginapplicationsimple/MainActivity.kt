@@ -14,7 +14,7 @@ import com.example.techjini.loginapplicationsimple.databinding.ActivityMainBindi
  * Created by Surya N
  */
 
-class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClickListener{
+open class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClickListener{
 
     override fun showError(error: String?) {
         binding?.root?.let { error?.let { it1 -> Snackbar.make(it, it1,Snackbar.LENGTH_SHORT).show() } }
