@@ -15,24 +15,24 @@ import com.example.techjini.loginapplicationsimple.databinding.ActivityMainBindi
  * Created by Surya N
  */
 
-open class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClickListener{
+open class MainActivity : AppCompatActivity(), MainContractor.View, View.OnClickListener {
 
     override fun showError(error: String?) {
-        binding?.root?.let { error?.let { it1 -> Snackbar.make(it, it1,Snackbar.LENGTH_SHORT).show() } }
+        binding?.root?.let { error?.let { it1 -> Snackbar.make(it, it1, Snackbar.LENGTH_SHORT).show() } }
         isDataReady = true
         dataListener?.onDataLoaded()
     }
 
-    override fun setInvalidError(view: Int, isError : Boolean) {
-        when(view){
-            R.id.emailtil -> setErrorMessage(binding?.emailtil,isError,getString(R.string.email_error))
+    override fun setInvalidError(view: Int, isError: Boolean) {
+        when (view) {
+            R.id.emailtil -> setErrorMessage(binding?.emailtil, isError, getString(R.string.email_error))
         }
     }
 
-    override fun setError(view: Int, isError : Boolean) {
-        when(view){
-            R.id.emailtil -> setErrorMessage(binding?.emailtil,isError,getString(R.string.email_empty))
-            R.id.nametil -> setErrorMessage(binding?.nametil,isError, getString(R.string.name_empty))
+    override fun setError(view: Int, isError: Boolean) {
+        when (view) {
+            R.id.emailtil -> setErrorMessage(binding?.emailtil, isError, getString(R.string.email_empty))
+            R.id.nametil -> setErrorMessage(binding?.nametil, isError, getString(R.string.name_empty))
         }
     }
 
@@ -45,15 +45,15 @@ open class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClic
     }
 
     override fun onClick(view: View?) {
-        when(view?.id){
-           R.id.submit -> {
-               binding?.username?.text = binding?.username?.text?.trim() as Editable?
-               binding?.email?.text = binding?.email?.text?.trim() as Editable?
-               binding?.email?.setSelection(binding?.email?.text?.length?:0)
-               binding?.username?.setSelection(binding?.username?.text?.length?:0)
-               presenter?.validateFields(binding?.username?.text?.toString(),
-                       binding?.email?.text?.toString())
-           }
+        when (view?.id) {
+            R.id.submit -> {
+                binding?.username?.text = binding?.username?.text?.trim() as Editable?
+                binding?.email?.text = binding?.email?.text?.trim() as Editable?
+                binding?.email?.setSelection(binding?.email?.text?.length ?: 0)
+                binding?.username?.setSelection(binding?.username?.text?.length ?: 0)
+                presenter?.validateFields(binding?.username?.text?.toString(),
+                        binding?.email?.text?.toString())
+            }
         }
     }
 
@@ -62,14 +62,14 @@ open class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClic
         progressDialog?.show()
     }
 
-    var dataListener : DataListener ? = null
+    var dataListener: DataListener? = null
 
     override fun hideProgress() {
         progressDialog?.dismiss()
     }
 
     override fun updateUI() {
-        ConfirmDialogFragment().show(supportFragmentManager,ConfirmDialogFragment::class.java.name)
+        ConfirmDialogFragment().show(supportFragmentManager, ConfirmDialogFragment::class.java.name)
         isDataReady = true
         dataListener?.onDataLoaded()
     }
@@ -82,14 +82,13 @@ open class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClic
     }
 
 
-
-    private var binding : ActivityMainBinding ? = null
-    private var presenter : MainPresenter ? = null
-    private var simpleAPI : SimpleAPI ? = null
+    private var binding: ActivityMainBinding? = null
+    private var presenter: MainPresenter? = null
+    private var simpleAPI: SimpleAPI? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding?.clickHandler = this
         simpleAPI = SimpleAPICall.getSimpleAPI(this)
         presenter = MainPresenter(this, simpleAPI)
@@ -97,14 +96,14 @@ open class MainActivity : AppCompatActivity() , MainContractor.View, View.OnClic
 
     // To perform anything in test we annotate that function as VisibleForTesting
     @VisibleForTesting
-    fun setSimpleAPI(simpleAPI: SimpleAPI){
-        this.simpleAPI = simpleAPI
+    fun setSimpleAPI(simpleAPI: SimpleAPI) {
+        presenter?.simpleAPI = simpleAPI
     }
 
 
-    var isDataReady : Boolean = false
+    var isDataReady: Boolean = false
 
-    interface DataListener{
+    interface DataListener {
         fun onDataLoaded()
     }
 }

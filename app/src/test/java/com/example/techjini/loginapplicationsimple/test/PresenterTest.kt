@@ -25,72 +25,72 @@ import rx.Observable
  */
 class PresenterTest : BaseTest() {
 
-    private var presenter : MainPresenter ? = null
+    private var presenter: MainPresenter? = null
 
     @Mock
-    private lateinit var view : MainContractor.View
+    private lateinit var view: MainContractor.View
 
-    private var model : InfoModel ?= null
+    private var model: InfoModel? = null
 
     @Mock
-    private lateinit var simpleAPI : SimpleAPI
+    private lateinit var simpleAPI: SimpleAPI
 
-    private var subscriber : MainPresenter.SubmitSubscriber ? = null
+    private var subscriber: MainPresenter.SubmitSubscriber? = null
 
     private val httpException = HttpException(Response.error<Any>(409, mock<ResponseBody>(ResponseBody::class.java)))
 
-    override fun setUp(){
+    override fun setUp() {
         super.setUp()
-        model = JsonToObject.getResponse("response",InfoModel::class.java) as InfoModel
+        model = JsonToObject.getResponse("response", InfoModel::class.java) as InfoModel
         presenter = MainPresenter(view, simpleAPI)
         subscriber = presenter?.SubmitSubscriber()
     }
 
     @Test
-    fun verifyUserNameAndEmailFailureCase(){
-        presenter?.validateFields(null,null)
+    fun verifyUserNameAndEmailFailureCase() {
+        presenter?.validateFields(null, null)
         verify(view, atLeast(2)).setError(anyInt(), anyBoolean())
-        presenter?.validateFields(null,"")
+        presenter?.validateFields(null, "")
         verify(view, atLeast(2)).setError(anyInt(), anyBoolean())
-        presenter?.validateFields("",null)
+        presenter?.validateFields("", null)
         verify(view, atLeast(2)).setError(anyInt(), anyBoolean())
-        presenter?.validateFields("","")
+        presenter?.validateFields("", "")
         verify(view, atLeast(2)).setError(anyInt(), anyBoolean())
-        presenter?.validateFields("MainPresenter","")
+        presenter?.validateFields("MainPresenter", "")
         verify(view, atLeast(2)).setError(anyInt(), anyBoolean())
     }
 
 
     @Test
-    fun verifyEmailInvalid(){
-        presenter?.validateFields("","Hello")
+    fun verifyEmailInvalid() {
+        presenter?.validateFields("", "Hello")
         verify(view, atLeast(2)).setError(anyInt(), anyBoolean())
         verify(view, atLeast(1)).setInvalidError(anyInt(), anyBoolean())
-        presenter?.validateFields(null,"Hello")
+        presenter?.validateFields(null, "Hello")
         verify(view, atLeast(2)).setError(anyInt(), anyBoolean())
         verify(view, atLeast(1)).setInvalidError(anyInt(), anyBoolean())
-        presenter?.validateFields("MainPresenter","Hello")
+        presenter?.validateFields("MainPresenter", "Hello")
         verify(view, atLeast(1)).setInvalidError(anyInt(), anyBoolean())
     }
 
 
     @Test
-    fun verifyEmailValidAndUserNameEmpty(){
-        presenter?.validateFields("","google@gmail.com")
+    fun verifyEmailValidAndUserNameEmpty() {
+        presenter?.validateFields("", "google@gmail.com")
         verify(view, atLeast(2)).setError(anyInt(), anyBoolean())
         verify(view, never()).setInvalidError(anyInt(), anyBoolean())
-        presenter?.validateFields(null,"google@gmail.com")
+        presenter?.validateFields(null, "google@gmail.com")
         verify(view, atLeast(2)).setError(anyInt(), anyBoolean())
         verify(view, never()).setInvalidError(anyInt(), anyBoolean())
     }
 
 
     @Test
-    fun verifyAPIFailureCase(){
+    fun verifyAPIFailureCase() {
         Mockito.`when`(simpleAPI.getInfo()).thenAnswer {
             Observable.error<HttpException>(httpException)
         }
-        presenter?.validateFields("MainPresenter","google@gmail.com")
+        presenter?.validateFields("MainPresenter", "google@gmail.com")
         verify(view, never()).setInvalidError(anyInt(), anyBoolean())
         verify(view, times(1)).showProgress()
         verify(view, times(1)).hideProgress()
@@ -98,9 +98,9 @@ class PresenterTest : BaseTest() {
     }
 
     @Test
-    fun verifyAPISuccessCase(){
+    fun verifyAPISuccessCase() {
         Mockito.`when`(simpleAPI.getInfo()).thenReturn(Observable.just(model))
-        presenter?.validateFields("MainPresenter","google@gmail.com")
+        presenter?.validateFields("MainPresenter", "google@gmail.com")
         verify(view, never()).setInvalidError(anyInt(), anyBoolean())
         verify(view, times(1)).showProgress()
         verify(view, times(1)).hideProgress()
@@ -108,14 +108,14 @@ class PresenterTest : BaseTest() {
     }
 
     @Test
-    fun verifyOnNext(){
+    fun verifyOnNext() {
         subscriber?.onNext(model)
         verify(view, times(1)).hideProgress()
         verify(view, times(1)).updateUI()
     }
 
     @Test
-    fun verifyOnError(){
+    fun verifyOnError() {
         subscriber?.onError(httpException)
         verify(view, times(1)).hideProgress()
         verify(view, times(1)).showError(anyString())

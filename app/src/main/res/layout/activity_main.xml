@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
             name="clickHandler"
-            type="android.view.View.OnClickListener"/>
+            type="android.view.View.OnClickListener" />
     </data>
 
 
@@ -16,111 +15,111 @@
         android:background="#333f48">
 
         <LinearLayout
+            android:id="@+id/lyt"
             android:layout_width="match_parent"
-            android:layout_alignParentTop="true"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:orientation="horizontal"
-            android:weightSum="3"
-            android:id="@+id/lyt">
+            android:weightSum="3">
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="#979797"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.5"
+                android:background="#979797" />
 
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textSize="24sp"
-            android:layout_marginTop="20dp"
-            android:textColor="#ff5722"
-            android:id="@+id/title"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:text="@string/login_to_the_app"
-            android:layout_margin="20dp"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="2"
+                android:text="@string/login_to_the_app"
+                android:textAlignment="center"
+                android:textColor="#ff5722"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="#979797"
                 android:layout_gravity="center"
                 android:layout_marginEnd="20dp"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.5"
+                android:background="#979797" />
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#4f5960"
-        android:layout_below="@id/lyt"
-        android:orientation="vertical">
-
-
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_name"
-            android:gravity="center"
-            android:textColorHint="#ffffff"
-            android:id="@+id/nametil"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp">
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:id="@+id/username"
-                android:textColor="#ffffff"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:inputType="textPersonName" />
-
-        </android.support.design.widget.TextInputLayout>
+            android:layout_below="@id/lyt"
+            android:background="#4f5960"
+            android:orientation="vertical">
 
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:gravity="center"
-            android:id="@+id/emailtil"
-            android:textColorHint="#ffffff"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp">
-
-            <android.support.design.widget.TextInputEditText
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/nametil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#ffffff"
-                android:inputType="textEmailAddress"
-                android:id="@+id/email"/>
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:hint="@string/user_name"
+                android:textAlignment="center"
+                android:textColorHint="#ffffff"
+                android:textSize="20sp">
 
-        </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+
+            </android.support.design.widget.TextInputLayout>
 
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/submit"
-            android:textSize="18sp"
-            android:id="@+id/submit"
-            android:onClick="@{clickHandler::onClick}"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            android:textColor="#111111"
-            android:background="#ff5722"
-            android:padding="10dp"
-            android:textAlignment="center"/>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/emailtil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:hint="@string/email"
+                android:textAlignment="center"
+                android:textColorHint="#ffffff"
+                android:textSize="20sp">
 
-    </LinearLayout>
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#ff5722"
+                android:onClick="@{clickHandler::onClick}"
+                android:padding="10dp"
+                android:text="@string/submit"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#111111"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </RelativeLayout>
 </layout>

@@ -1,11 +1,10 @@
 package com.example.techjini.loginapplicationsimple.utility
 
 import com.google.gson.Gson
-
 import java.io.IOException
 import java.io.InputStream
 import java.lang.reflect.Type
-import java.util.ArrayList
+import java.util.*
 
 object JsonToObject {
 

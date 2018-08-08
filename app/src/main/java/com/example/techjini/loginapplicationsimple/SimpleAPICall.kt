@@ -30,7 +30,7 @@ object SimpleAPICall {
     }
 
     @Synchronized
-    fun getSimpleAPI(context: Context): SimpleAPI ?{
+    fun getSimpleAPI(context: Context): SimpleAPI? {
         if (apiService == null) {
             apiService = createApiService(context)
         }

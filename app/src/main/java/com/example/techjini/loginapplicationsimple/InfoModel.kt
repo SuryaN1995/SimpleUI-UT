@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName
 open class InfoModel {
 
     @SerializedName("username")
-    var username : String ?= null
+    var username: String? = null
 
 
     @SerializedName("email")
-    var email : String ?= null
+    var email: String? = null
 }

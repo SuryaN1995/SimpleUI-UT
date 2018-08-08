@@ -6,17 +6,17 @@ package com.example.techjini.loginapplicationsimple
 object MainContractor {
 
 
-    interface Presenter{
+    interface Presenter {
         fun validateFields(username: String?, email: String?)
     }
 
 
-    interface View{
+    interface View {
         fun showProgress()
         fun hideProgress()
         fun updateUI()
-        fun setError(view : Int,isError:Boolean)
-        fun setInvalidError(view : Int,isError:Boolean)
-        fun showError(error : String?)
+        fun setError(view: Int, isError: Boolean)
+        fun setInvalidError(view: Int, isError: Boolean)
+        fun showError(error: String?)
     }
 }

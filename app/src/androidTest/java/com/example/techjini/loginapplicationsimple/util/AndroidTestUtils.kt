@@ -78,7 +78,7 @@ object AndroidTestUtils {
      *  Will fetch the response from assets/response_data folder based on responseName and responseStatus of
      * format response_data/responseName_responseStatus.json return the list of response
      */
-    fun getResponseAsList(context: Context, type : Type, name :String): List<*>{
+    fun getResponseAsList(context: Context, type: Type, name: String): List<*> {
         return Gson().fromJson(getJsonResponse(context,
                 name, ResponseStatus.SUCCESS), type)
     }

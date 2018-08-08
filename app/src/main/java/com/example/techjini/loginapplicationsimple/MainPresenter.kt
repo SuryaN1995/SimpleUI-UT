@@ -19,9 +19,9 @@ open class MainPresenter(var view: MainContractor.View, var simpleAPI: SimpleAPI
         model.email = email
         model.username = username
         checkFieldEmpty(model.email, R.id.emailtil)
-        checkFieldEmpty(model.username,R.id.nametil)
+        checkFieldEmpty(model.username, R.id.nametil)
         if (model.email?.isNotEmpty() == true && isValid(REG_EXP_EMAIL, model.email!!) == false)
-            view.setInvalidError(R.id.emailtil,true)
+            view.setInvalidError(R.id.emailtil, true)
         else
             checkFieldEmpty(model.email, R.id.emailtil)
         if (email?.isNotEmpty() == true && email?.let { isValid(REG_EXP_EMAIL, it) } == true && username?.isNotEmpty() == true) {
@@ -53,10 +53,10 @@ open class MainPresenter(var view: MainContractor.View, var simpleAPI: SimpleAPI
     }
 
 
-    open inner class SubmitSubscriber : Subscriber<InfoModel>(){
-        override fun onNext(info : InfoModel?) {
+    open inner class SubmitSubscriber : Subscriber<InfoModel>() {
+        override fun onNext(info: InfoModel?) {
             view?.hideProgress()
-            if(info?.email?.isNotEmpty() == true){
+            if (info?.email?.isNotEmpty() == true) {
                 view?.updateUI()
             }
         }
@@ -64,7 +64,7 @@ open class MainPresenter(var view: MainContractor.View, var simpleAPI: SimpleAPI
         override fun onCompleted() {
         }
 
-        override fun onError(error : Throwable?) {
+        override fun onError(error: Throwable?) {
             view?.hideProgress()
             view?.showError(error?.message)
         }
