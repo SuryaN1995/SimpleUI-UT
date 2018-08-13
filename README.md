@@ -1,5 +1,7 @@
-Android UT and UI 
-=================
+Android UT and UI Test Basic 
+============================
+To know more info about this check my [Medium blog](https://medium.com/@surya.n1447)
+
 Purpose of UI/UT in development
 -------------------------------
 The need of UI/UT thing in development
@@ -14,13 +16,10 @@ How to access the API
 * Examples of a working system configuration
 
 Unit Testing Basics:
--------------------
+--------------------
     Unit testing is written for the Presenter, 
     ViewModel and Managers where the code logic is used and to test those functionalities
     of business logic and respective API calls.
-    
-
-[Medium blog](https://medium.com/@surya.n1447)
 
     The basic format of the test that can be used to continuous Integration testing.
 
