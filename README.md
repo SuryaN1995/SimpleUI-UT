@@ -148,4 +148,4 @@ Toggle the below fields to Animation off for successful test execution,
 
 User Interface (UI) Test Output
 -------------------------------
-![Final Output](https://gfycat.com/SlightBlackandwhiteIbadanmalimbe)
+![Final Output](https://thumbs.gfycat.com/SlightBlackandwhiteIbadanmalimbe-size_restricted.gif)
