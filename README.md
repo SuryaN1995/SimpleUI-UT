@@ -148,4 +148,4 @@ Toggle the below fields to Animation off for successful test execution,
 
 User Interface (UI) Test Output
 -------------------------------
-![Final output](https://im2.ezgif.com/tmp/ezgif-2-994ee44d2b.gif)
+![Final output](https://drive.google.com/file/d/16KkDTV78rGP2L2SEByLr-hYOIcks78OQ/view?usp=sharing)
